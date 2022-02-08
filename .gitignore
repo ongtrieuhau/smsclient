@@ -6,5 +6,6 @@ Deploy_Tools/Setup.aip.cache/*
 Deploy_Tools/Setup_bak.aip
 Deploy_Tools/*SetupFiles/*
 Deploy_Libraries/list_id_drive_app.txt
-Deploy_Libraries/Log*
+Deploy_Libraries/Log-*
 runner-actions/*
+list_id_drive_app.txt
