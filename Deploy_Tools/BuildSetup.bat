@@ -1,0 +1,1 @@
+"D:\PortableApps\AdvancedInstaller\v18.6Portable\AdvancedInstallerPortable.exe" /execute "E:\CLOUDCODE\Github\hospitalsmsclient.exe\Deploy_Tools\Setup.aip" "E:\CLOUDCODE\Github\hospitalsmsclient.exe\Deploy_Tools\BuildSetupCommandFile.txt"
