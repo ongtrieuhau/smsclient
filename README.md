@@ -1,1 +1,1 @@
-# hospitalsmsclient.exe, thử lần 1
+# hospitalsmsclient.exe, thử lần 2
