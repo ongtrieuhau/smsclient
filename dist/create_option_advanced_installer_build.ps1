@@ -1,1 +1,4 @@
-Write-Host "Thử chạy create_option_advanced_installer_build.ps1"
+$PathConfig = $PSCommandPath + '.action.config.json'
+$Config = Get-Content -Path $PathConfig | ConvertFrom-Json
+Write-Host $PathConfig
+Write-Host $Config.name2
