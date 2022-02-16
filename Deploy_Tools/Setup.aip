@@ -24,10 +24,10 @@
     <ROW Property="ARPURLINFOABOUT" Value="https://www.facebook.com/groups/dhg.hospital/"/>
     <ROW Property="ARPURLUPDATEINFO" Value="https://www.facebook.com/groups/dhg.hospital/"/>
     <ROW Property="Manufacturer" Value="DH.Solutions"/>
-    <ROW Property="ProductCode" Value="1033:{FD513043-5472-4C4C-8566-A12AD5B5EEA7} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{032521F5-817B-4686-8AB7-5F243E5DE90A} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="DH.HospitalSMSClient"/>
-    <ROW Property="ProductVersion" Value="1.18.910.0" Type="32"/>
+    <ROW Property="ProductVersion" Value="1.18.911.0" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND;AI_SETUPEXEPATH;SETUPEXEDIR"/>
     <ROW Property="UpgradeCode" Value="{2C066CB0-60A3-4FA0-8EE6-FD624E735121}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -47,7 +47,7 @@
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
-    <ROW Component="AI_CustomARPName" ComponentId="{E5487883-EBA8-4C30-A133-D7D39247E9DE}" Directory_="APPDIR" Attributes="4" KeyPath="DisplayName" Options="1"/>
+    <ROW Component="AI_CustomARPName" ComponentId="{C589527D-8371-42F5-B7FD-300D4DD1A584}" Directory_="APPDIR" Attributes="4" KeyPath="DisplayName" Options="1"/>
     <ROW Component="AI_ExePath" ComponentId="{518ADA27-49ED-473F-A8A0-142273F7F408}" Directory_="APPDIR" Attributes="4" KeyPath="AI_ExePath"/>
     <ROW Component="APPDIR" ComponentId="{99139B0C-53A8-4FE9-9F7E-8654399EFBB4}" Directory_="APPDIR" Attributes="0"/>
     <ROW Component="ChilkatDotNet4.dll" ComponentId="{01D8160A-C09C-4672-8366-5BD2D3CCE389}" Directory_="APPDIR" Attributes="256" KeyPath="ChilkatDotNet4.dll"/>
