@@ -1,0 +1,1 @@
+Write-Host "Thử chạy create_option_advanced_installer_build.ps1"

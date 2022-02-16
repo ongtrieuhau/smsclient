@@ -8,9 +8,9 @@ jobs:
          - name: Checkout - pull git repo
            uses: actions/checkout@v2
 
-         #  - name: Phân tích Folder
-         #    run: .\deployFolder.ps1
-         #    shell: powershell
+          - name: Powershell get data to build
+            run: .\dist\create_option_advanced_installer_build.ps1
+            shell: powershell
 
          #  - name: Run nodejs
          #    run: node index.js
