@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT Type="Advanced Installer" CreateVersion="15.2" version="19.1" Modules="professional" RootPath="..\..*" Language="en" Id="{90219A7A-17F4-4F2A-AEA7-1450F05E451A}">
+<DOCUMENT Type="Advanced Installer" CreateVersion="15.2" version="18.6" Modules="professional" RootPath="..\..*" Language="en" Id="{90219A7A-17F4-4F2A-AEA7-1450F05E451A}">
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
     <ROW Property="AI_COLOR_DISABLED_TEXT" Value="3026478" MultiBuildValue="DefaultBuild:15461355" MsiKey="AI_COLOR_DISABLED_TEXT"/>
@@ -24,7 +24,7 @@
     <ROW Property="ARPURLINFOABOUT" Value="https://www.facebook.com/groups/dhg.hospital/"/>
     <ROW Property="ARPURLUPDATEINFO" Value="https://www.facebook.com/groups/dhg.hospital/"/>
     <ROW Property="Manufacturer" Value="DH.Solutions"/>
-    <ROW Property="ProductCode" Value="1033:{F9E351EF-9508-46B3-AA8C-AF6ED7485F0D} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{0E26C682-D496-4A93-8771-17AE5F3A64A6} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="DH.HospitalSMSClient"/>
     <ROW Property="ProductVersion" Value="1.18.909.0" Type="32"/>
@@ -332,7 +332,6 @@
     <ROW Fragment="SequenceDialogs.aip" Path="&lt;AI_THEMES&gt;surface\fragments\SequenceDialogs.aip"/>
     <ROW Fragment="Sequences.aip" Path="&lt;AI_FRAGS&gt;Sequences.aip"/>
     <ROW Fragment="StaticUIStrings.aip" Path="&lt;AI_FRAGS&gt;StaticUIStrings.aip"/>
-    <ROW Fragment="Themes.aip" Path="&lt;AI_FRAGS&gt;Themes.aip"/>
     <ROW Fragment="UI.aip" Path="&lt;AI_THEMES&gt;surface\fragments\UI.aip"/>
     <ROW Fragment="Validation.aip" Path="&lt;AI_FRAGS&gt;Validation.aip"/>
     <ROW Fragment="VerifyRemoveDlg.aip" Path="&lt;AI_THEMES&gt;surface\fragments\VerifyRemoveDlg.aip"/>
@@ -435,6 +434,7 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
     <ROW Action="AI_BACKUP_AI_SETUPEXEPATH" Type="51" Source="AI_SETUPEXEPATH_ORIGINAL" Target="[AI_SETUPEXEPATH]"/>
+    <ROW Action="AI_ChooseTextStyles" Type="1" Source="aicustact.dll" Target="ChooseTextStyles"/>
     <ROW Action="AI_DATA_SETTER" Type="51" Source="CustomActionData" Target="[AI_SETUPEXEPATH]"/>
     <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
     <ROW Action="AI_DeleteCadLzma" Type="51" Source="AI_DeleteLzma" Target="[AI_SETUPEXEPATH]"/>
@@ -627,6 +627,7 @@
     <ROW Action="MaintenanceTypeDlg" Condition="AI_MAINT" Sequence="1250" SeqType="3" MsiKey="MaintenanceTypeDlg"/>
     <ROW Action="AI_BACKUP_AI_SETUPEXEPATH" Sequence="99"/>
     <ROW Action="AI_RESTORE_AI_SETUPEXEPATH" Condition="AI_SETUPEXEPATH_ORIGINAL" Sequence="101"/>
+    <ROW Action="AI_ChooseTextStyles" Sequence="74"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiLaunchConditionsComponent">
     <ROW Condition="((VersionNT &lt;&gt; 501) AND (VersionNT &lt;&gt; 502))" Description="[ProductName] cannot be installed on [WindowsTypeNT5XDisplay]." DescriptionLocId="AI.LaunchCondition.NoNT5X" IsPredefined="true" Builds="DefaultBuild"/>
@@ -666,17 +667,6 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
     <ROW Shortcut="DHG.HospitalSMSClient" Directory_="DesktopFolder" Name="DHG~1.HOS|DHG.Hospital SMSClient" Component_="HospitalSMSClient.exe" Target="[#HospitalSMSClient.exe]" Hotkey="0" Icon_="Logo_1.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
     <ROW Shortcut="DHG.HospitalSMSClient_1" Directory_="DHSolutions_Dir" Name="DHG~1.HOS|DHG.Hospital SMSClient" Component_="HospitalSMSClient.exe" Target="[#HospitalSMSClient.exe]" Hotkey="0" Icon_="Logo_1.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
-  </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.MsiTextStyleComponent">
-    <ROW TextStyle="BrandingStyle" FaceName="Segoe UI" Size="8" Color="2171376" MultiBuildColor="DefaultBuild:15395562" StyleBits="0" MsiKey="BrandingStyle"/>
-    <ROW TextStyle="DlgFont8" FaceName="Segoe UI" Size="11" Color="14079702" MultiBuildColor="DefaultBuild:4473924" StyleBits="0" MsiKey="DlgFont8"/>
-    <ROW TextStyle="ImageButton" FaceName="Segoe UI" Size="11" Color="14079702" MultiBuildColor="DefaultBuild:8289918" StyleBits="1" MsiKey="ImageButton"/>
-    <ROW TextStyle="InputCtrlFont" FaceName="Segoe UI" Size="8" Color="16777215" MultiBuildColor="DefaultBuild:8289918" StyleBits="0" MsiKey="InputCtrlFont"/>
-    <ROW TextStyle="Manufacturer" FaceName="Verdana" Size="10" Color="16777215" MultiBuildColor="DefaultBuild:37955" StyleBits="0" MsiKey="Manufacturer"/>
-    <ROW TextStyle="MetroInstallButton" FaceName="Segoe UI" Size="22" Color="14079702" MultiBuildColor="DefaultBuild:35647" StyleBits="0" MsiKey="MetroInstallButton"/>
-    <ROW TextStyle="ProductNameForSplash" FaceName="Segoe UI Symbol" Size="30" Color="16777215" MultiBuildColor="DefaultBuild:4473924" StyleBits="1" MsiKey="ProductNameForSplash"/>
-    <ROW TextStyle="SubTitle" FaceName="Segoe UI" Size="14" Color="14079702" MultiBuildColor="DefaultBuild:8289918" StyleBits="0" MsiKey="SubTitle"/>
-    <ROW TextStyle="SubnoteFont" FaceName="Segoe UI" Size="8" Color="9671571" MultiBuildColor="DefaultBuild:14079702" StyleBits="0" MsiKey="SubnoteFont"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
     <ATTRIBUTE name="UsedTheme" value="surface"/>
