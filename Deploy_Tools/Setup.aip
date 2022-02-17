@@ -19,7 +19,7 @@
     <ROW Property="ARPHELPLINK" Value="https://www.facebook.com/groups/dhg.hospital/"/>
     <ROW Property="ARPHELPTELEPHONE" Value="0988.255.863"/>
     <ROW Property="ARPNOREPAIR" Value="1" MultiBuildValue="DefaultBuild:1"/>
-    <ROW Property="ARPPRODUCTICON" Value="Logo_1.exe" Type="8"/>
+    <ROW Property="ARPPRODUCTICON" Value="Logo.exe" Type="8"/>
     <ROW Property="ARPSYSTEMCOMPONENT" Value="1"/>
     <ROW Property="ARPURLINFOABOUT" Value="https://www.facebook.com/groups/dhg.hospital/"/>
     <ROW Property="ARPURLUPDATEINFO" Value="https://www.facebook.com/groups/dhg.hospital/"/>
@@ -313,7 +313,7 @@
     <ROW BootstrOptKey="GlobalOptions" DownloadFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\prerequisites" Options="2"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
-    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFolder="hospitalsmsclient.exe\Deploy_Tools\OutputFiles" PackageFileName="SetupHospitalSMSClient" Languages="en" InstallationType="4" CabsLocation="1" PackageType="1" FilesInsideExe="true" ExeIconPath="hospitalsmsclient.exe\Deploy_Tools\Logo.ico" ExtractionFolder="[AppDataFolder][|Manufacturer]\[|ProductName] [|ProductVersion]\install" ExtUI="true" UseLargeSchema="true" ExeName="SetupHospitalSMSClient"/>
+    <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFolder="hospitalsmsclient.exe\Deploy_Tools\OutputFiles" PackageFileName="SetupHospitalSMSClient" Languages="en" InstallationType="4" CabsLocation="1" PackageType="1" FilesInsideExe="true" ExeIconPath="smsclient\Deploy_Tools\Logo.ico" ExtractionFolder="[AppDataFolder][|Manufacturer]\[|ProductName] [|ProductVersion]\install" ExtUI="true" UseLargeSchema="true" ExeName="SetupHospitalSMSClient"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildEventsComponent">
     <ROW EventId="0" EventRun="powershell.exe" EventCmdLine="-windowstyle hidden -ExecutionPolicy Bypass -NoProfile -NonInteractive -File &quot;[|AI_BUILD_OUTPUT_FOLDER]\..\compressRar.ps1&quot; -SourcePathFile &quot;[|AI_BUILD_OUTPUT_FILE]&quot; -ExecuteVersion [|ExecuteVersion]" EventDescription="Zip output file" EventOrder="1" EventType="2" EventInterupt="false" EventEnabled="false" EventPrecompression="false" RollbackEvent="false" EventBuild="DefaultBuild"/>
@@ -596,7 +596,7 @@
     <ROW Feature_="MainFeature" Component_="Janus.Data.v3.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
-    <ROW Name="Logo_1.exe" SourcePath="hospitalsmsclient.exe\Deploy_Tools\Logo.ico" Index="0"/>
+    <ROW Name="Logo.exe" SourcePath="smsclient\Deploy_Tools\Logo.ico" Index="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
     <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
@@ -666,8 +666,8 @@
     <ROW Registry="VersionMinor" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="VersionMinor" Value="#18" Component_="AI_CustomARPName" VirtualValue="#"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
-    <ROW Shortcut="DHG.HospitalSMSClient" Directory_="DesktopFolder" Name="DHG~1.HOS|DHG.Hospital SMSClient" Component_="HospitalSMSClient.exe" Target="[#HospitalSMSClient.exe]" Hotkey="0" Icon_="Logo_1.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
-    <ROW Shortcut="DHG.HospitalSMSClient_1" Directory_="DHSolutions_Dir" Name="DHG~1.HOS|DHG.Hospital SMSClient" Component_="HospitalSMSClient.exe" Target="[#HospitalSMSClient.exe]" Hotkey="0" Icon_="Logo_1.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="DHG.HospitalSMSClient" Directory_="DesktopFolder" Name="DHG~1.HOS|DHG.Hospital SMSClient" Component_="HospitalSMSClient.exe" Target="[#HospitalSMSClient.exe]" Hotkey="0" Icon_="Logo.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="DHG.HospitalSMSClient_1" Directory_="DHSolutions_Dir" Name="DHG~1.HOS|DHG.Hospital SMSClient" Component_="HospitalSMSClient.exe" Target="[#HospitalSMSClient.exe]" Hotkey="0" Icon_="Logo.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiTextStyleComponent">
     <ROW TextStyle="BrandingStyle" FaceName="Segoe UI" Size="8" Color="2171376" MultiBuildColor="DefaultBuild:15395562" StyleBits="0" MsiKey="BrandingStyle"/>
