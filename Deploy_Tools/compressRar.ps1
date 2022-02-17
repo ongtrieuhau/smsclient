@@ -1,17 +1,15 @@
 param (
     $SourcePathFile,
-    $ExeName
+    $ExeName,
+    $ExecuteVersion
 )
-Write-Output $SourcePathFile, $ExeName
+Write-Host $SourcePathFile, $ExeName
 $PathSource = $SourcePathFile
 $DirectorySource = [System.IO.Path]::GetDirectoryName($SourcePathFile)
 $DirectorySource_0 = [System.IO.Path]::GetDirectoryName($DirectorySource)
-$PathExe = [System.IO.Path]::GetDirectoryName($DirectorySource_0) + "\Deploy_Libraries\" + $ExeName
-Write-Output $PathExe 
-$VersionExe = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($PathExe).FileVersion
 
 $DestNameFile = [System.IO.Path]::GetFileNameWithoutExtension($SourcePathFile)
-$DestPathFile = $DirectorySource + "\" + $DestNameFile + ".v" + $VersionExe + ".rar"
+$DestPathFile = $DirectorySource + "\" + $DestNameFile + ".v" + $ExecuteVersion + ".rar"
 
 $rarExe = $DirectorySource_0 + "\Rar.exe"
 

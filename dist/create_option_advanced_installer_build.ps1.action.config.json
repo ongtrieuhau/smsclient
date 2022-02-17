@@ -1,4 +1,8 @@
 {
-   "name": "create option for advanced installer build",
-   "name2": "Thử name 2"
+   "Name": "create option for advanced installer build",
+   "PathExecuteVersion": "..\\Deploy_Libraries\\HospitalSMSClient.exe",
+   "PathAdvancedInstallerCommandFile": "..\\Deploy_Tools\\BuildCommandFile.txt",
+   "PathAdvancedInstallerProjectFile": "..\\Deploy_Tools\\Setup.aip",
+   "PathAdvancedInstallerOutputFolder": "..\\Deploy_Tools\\OutputFiles",
+   "OutputPackageName": "SetupHospitalSMSClient.exe"
 }
