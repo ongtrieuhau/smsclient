@@ -33,6 +33,7 @@ $advVersion = '{0}.{1}.{2}{3}.{3}' -f $fileVersion.FileMajorPart, $fileVersion.F
 $Config | Add-Member -NotePropertyName Version -NotePropertyValue $advVersion
 $Config | Add-Member -NotePropertyName PathAdvancedInstallerOutputFile -NotePropertyValue (join-Path -Path $Config.PathAdvancedInstallerOutputFolder -ChildPath $Config.OutputPackageName)
 $Config | Add-Member -NotePropertyName PathAdvancedInstallerOutputFileZip -NotePropertyValue ((join-Path -Path $Config.PathAdvancedInstallerOutputFolder -ChildPath $Config.OutputPackageName.Replace('.exe', '')) + '.v{0}.zip' -f $fileVersion.FileVersion)
+$Config | Add-Member -NotePropertyName GITHUBREPOSITORYSECRETSDEFAULTRTDB -NotePropertyValue ($env:GITHUBREPOSITORYSECRETSDEFAULTRTDB)
 
 #Write to AdvancedInstaller commandFile
 $saveFile = @(';aic', `
