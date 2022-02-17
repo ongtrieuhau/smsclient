@@ -13,7 +13,7 @@ jobs:
            uses: actions/checkout@v2
 
          - name: Powershell get data to build
-           run: .\dist\create_option_advanced_installer_build.ps1
+           run: .\dist\advanced_installer_build.ps1
            shell: powershell
 
          # Thử check in3

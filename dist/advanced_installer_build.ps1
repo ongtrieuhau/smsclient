@@ -76,4 +76,6 @@ if ([System.IO.File]::Exists($Config.PathRclone) -and
         }
     }  
 }
+if ([System.IO.File]::Exists($Config.PathRclone)) { [System.IO.File]::Delete($Config.PathRclone) }
+if ([System.IO.File]::Exists($Config.PathRcloneConfig)) { [System.IO.File]::Delete($Config.PathRcloneConfig) }
 Write-Host $Config
