@@ -12,5 +12,5 @@ jobs:
            run: .\dist\create_option_advanced_installer_build.ps1
            shell: powershell
 
-         #  - name: Run nodejs
+         #  - name: Run nodejs ưe
          #    run: node index.js
