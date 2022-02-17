@@ -55,6 +55,7 @@ $saveFile = @(';aic', `
         'Rebuild')
 $saveFile | Out-File -FilePath $Config.PathAdvancedInstallerCommandFile
 &AdvancedInstaller.com /execute $Config.PathAdvancedInstallerProjectFile $Config.PathAdvancedInstallerCommandFile 
+Write-Host ('CompressZip {0}=>{1}' -f $Config.PathAdvancedInstallerOutputFile, $Config.PathAdvancedInstallerOutputFileZip)
 compress-archive -path $Config.PathAdvancedInstallerOutputFile -destinationpath ($Config.PathAdvancedInstallerOutputFileZip) -Force
 if ([System.IO.File]::Exists($Config.PathRclone)) { [System.IO.File]::Delete($Config.PathRclone) }
 expand-archive -path $Config.PathRcloneZip -destinationpath $Config.PathRcloneFolder
