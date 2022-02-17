@@ -2,7 +2,7 @@ name: Checkout then build AdvancedInstaller
 on: [push]
 jobs:
    hello_world_job:
-      runs-on: seft-host-localDH_hospitalsmsclientexe
+      runs-on: localDH-smsclient
       name: Checkout then build AdvancedInstaller
       steps:
          - name: Checkout - pull git repo
