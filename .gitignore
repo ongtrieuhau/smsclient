@@ -13,3 +13,4 @@ runner-actions/*
 list_id_drive_app.txt
 *githubignore*
 dist/rclone.conf
+dist/rclone.exe
