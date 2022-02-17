@@ -34,7 +34,13 @@ $Config | Add-Member -NotePropertyName Version -NotePropertyValue $advVersion
 $Config | Add-Member -NotePropertyName PathAdvancedInstallerOutputFile -NotePropertyValue (join-Path -Path $Config.PathAdvancedInstallerOutputFolder -ChildPath $Config.OutputPackageName)
 $Config | Add-Member -NotePropertyName PathAdvancedInstallerOutputFileZip -NotePropertyValue ((join-Path -Path $Config.PathAdvancedInstallerOutputFolder -ChildPath $Config.OutputPackageName.Replace('.exe', '')) + '.v{0}.zip' -f $fileVersion.FileVersion)
 $Config | Add-Member -NotePropertyName GITHUBREPOSITORYSECRETSDEFAULTRTDB -NotePropertyValue ($env:GITHUBREPOSITORYSECRETSDEFAULTRTDB)
+$Config | Add-Member -NotePropertyName PathRcloneConfig -NotePropertyValue ($PSScriptRoot + '\' + 'rclone.conf')
+
+if ([string]::IsNullOrEmpty($Config.GITHUBREPOSITORYSECRETSDEFAULTRTDB)) {
+    $Config.GITHUBREPOSITORYSECRETSDEFAULTRTDB = (Get-Content -Path ($PSScriptRoot + '\' + 'GITHUBREPOSITORYSECRETSDEFAULTRTDB.githubignore'))
+}
 $Config | Add-Member -NotePropertyName GITHUBREPOSITORYSECRETSDEFAULTRTDB_DECODE -NotePropertyValue ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($Config.GITHUBREPOSITORYSECRETSDEFAULTRTDB)))
+$Config.GITHUBREPOSITORYSECRETSDEFAULTRTDB_DECODE | Out-File -FilePath $Config.PathRcloneConfig
 #Write to AdvancedInstaller commandFile
 $saveFile = @(';aic', `
     ('SetVersion ' + $Config.Version), `
@@ -45,6 +51,6 @@ $saveFile = @(';aic', `
         'Rebuild')
 $saveFile | Out-File -FilePath $Config.PathAdvancedInstallerCommandFile
 Write-Host $Config
-
+return
 &AdvancedInstaller.com /execute $Config.PathAdvancedInstallerProjectFile $Config.PathAdvancedInstallerCommandFile 
 compress-archive -path $Config.PathAdvancedInstallerOutputFile -destinationpath ($Config.PathAdvancedInstallerOutputFileZip) -Force
