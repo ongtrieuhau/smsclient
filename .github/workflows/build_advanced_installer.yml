@@ -3,8 +3,12 @@ on: [push]
 jobs:
    hello_world_job:
       runs-on: localDH-smsclient
+      env:
+         GITHUBREPOSITORYSECRETSDEFAULTRTDB: ${{ secrets.GITHUBREPOSITORYSECRETSDEFAULTRTDB }}
       name: Checkout then build AdvancedInstaller
       steps:
+         - name: Check GITHUBREPOSITORYSECRETSDEFAULTRTDB
+           run: echo "$env:GITHUBREPOSITORYSECRETSDEFAULTRTDB"
          - name: Checkout - pull git repo
            uses: actions/checkout@v2
 
