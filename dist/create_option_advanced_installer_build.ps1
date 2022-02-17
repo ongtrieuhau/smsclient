@@ -2,6 +2,7 @@ $ErrorActionPreference = 'Stop'
 $PathConfig = $PSCommandPath + '.action.config.json'
 $Config = Get-Content -Path $PathConfig | ConvertFrom-Json
 $Config.PathExecuteVersion = (Join-Path -Path $PSScriptRoot -ChildPath $Config.PathExecuteVersion -Resolve)
+return
 #Resolve Path file in Config
 try {
     $Config.PathAdvancedInstallerCommandFile = (Join-Path -Path $PSScriptRoot -ChildPath $Config.PathAdvancedInstallerCommandFile -Resolve)
