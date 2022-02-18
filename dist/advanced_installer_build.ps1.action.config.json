@@ -7,8 +7,8 @@
    "OutputPackageName": "SetupHospitalSMSClient.exe",
    "PathRcloneZip": "..\\Deploy_Tools\\rclone.exe.zip",
    "RcloneCloudPath": "",
-   "IsShowConfig": true,
-   "IsRunRcUpload": false,
+   "IsShowConfig": false,
+   "IsRunRcUpload": true,
    "IsAddFileAPPDIR": true,
    "PathAdvancedInstallerAPPDIR": "..\\Deploy_Libraries",
    "APPDIRFilenames": [
