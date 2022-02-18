@@ -3,6 +3,7 @@ $PathConfig = $PSCommandPath + '.action.config.json'
 $Config = Get-Content -Path $PathConfig | ConvertFrom-Json
 $Config.PathExecuteVersion = (Join-Path -Path $PSScriptRoot -ChildPath $Config.PathExecuteVersion -Resolve)
 $Config.PathRcloneZip = (Join-Path -Path $PSScriptRoot -ChildPath $Config.PathRcloneZip -Resolve)
+$Config.PathAdvancedInstallerAPPDIR = (Join-Path -Path $PSScriptRoot -ChildPath $Config.PathAdvancedInstallerAPPDIR -Resolve)
 #Resolve Path file in Config
 try {
     $Config.PathAdvancedInstallerCommandFile = (Join-Path -Path $PSScriptRoot -ChildPath $Config.PathAdvancedInstallerCommandFile -Resolve)
@@ -43,40 +44,50 @@ if ([string]::IsNullOrEmpty($Config.GITHUBREPOSITORYSECRETSDEFAULTRTDB)) {
     $Config.GITHUBREPOSITORYSECRETSDEFAULTRTDB = (Get-Content -Path ($PSScriptRoot + '\' + 'GITHUBREPOSITORYSECRETSDEFAULTRTDB.githubignore'))
 }
 $Config | Add-Member -NotePropertyName GITHUBREPOSITORYSECRETSDEFAULTRTDB_DECODE -NotePropertyValue ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($Config.GITHUBREPOSITORYSECRETSDEFAULTRTDB)))
-#$Config.GITHUBREPOSITORYSECRETSDEFAULTRTDB_DECODE | Out-File -FilePath $Config.PathRcloneConfig
 [System.IO.File]::WriteAllLines($Config.PathRcloneConfig, $Config.GITHUBREPOSITORYSECRETSDEFAULTRTDB_DECODE, (New-Object System.Text.UTF8Encoding $False))
 #Write to AdvancedInstaller commandFile
-$saveFile = @(';aic', `
-    ('SetVersion ' + $Config.Version), `
-    ('SetProperty ExecuteVersion="{0}"' -f $fileVersion.FileVersion), `
-    ('SetOutputLocation -buildname DefaultBuild -path {0}' -f $Config.PathAdvancedInstallerOutputFolder), `
-    ('SetPackageName {0} -buildname DefaultBuild' -f $Config.OutputPackageName), `
-        'Save', `
-        'Rebuild')
-$saveFile | Out-File -FilePath $Config.PathAdvancedInstallerCommandFile
+$arrayLines = New-Object System.Collections.Generic.List[string]
+$arrayLines.Add(';aic')
+$arrayLines.Add('SetVersion {0}' -f $Config.Version)
+$arrayLines.Add('SetProperty ExecuteVersion="{0}"' -f $fileVersion.FileVersion)
+$arrayLines.Add('SetOutputLocation -buildname DefaultBuild -path {0}' -f $Config.PathAdvancedInstallerOutputFolder)
+$arrayLines.Add('SetPackageName {0} -buildname DefaultBuild' -f $Config.OutputPackageName)
+if ($Config.IsAddFileAPPDIR) {
+    for ($i = 0; $i -lt $Config.APPDIRFilenames.Count; $i++) {
+        $itemName = $Config.APPDIRFilenames[$i]
+        $itemName = Join-Path -Path $Config.PathAdvancedInstallerAPPDIR -ChildPath $itemName
+        $arrayLines.Add('AddFile APPDIR "{0}" -overwrite always' -f $itemName) 
+    }
+}
+$arrayLines.Add('Save')
+$arrayLines.Add('Rebuild')
+$arrayLines | Out-File -FilePath $Config.PathAdvancedInstallerCommandFile
+
 &AdvancedInstaller.com /execute $Config.PathAdvancedInstallerProjectFile $Config.PathAdvancedInstallerCommandFile 
 Write-Host ('CompressZip {0}=>{1}' -f $Config.PathAdvancedInstallerOutputFile, $Config.PathAdvancedInstallerOutputFileZip)
 compress-archive -path $Config.PathAdvancedInstallerOutputFile -destinationpath ($Config.PathAdvancedInstallerOutputFileZip) -Force
-if ([System.IO.File]::Exists($Config.PathRclone)) { [System.IO.File]::Delete($Config.PathRclone) }
-expand-archive -path $Config.PathRcloneZip -destinationpath $Config.PathRcloneFolder
-if ([System.IO.File]::Exists($Config.PathRclone) -and 
-    [System.IO.File]::Exists($Config.PathRcloneConfig)) {
-    $Config | Add-Member -NotePropertyName RcloneArgumentList -NotePropertyValue ('')
+if ($Config.IsRunRcUpload) {    
+    if ([System.IO.File]::Exists($Config.PathRclone)) { [System.IO.File]::Delete($Config.PathRclone) }
+    expand-archive -path $Config.PathRcloneZip -destinationpath $Config.PathRcloneFolder
+    if ([System.IO.File]::Exists($Config.PathRclone) -and 
+        [System.IO.File]::Exists($Config.PathRcloneConfig)) {
+        $Config | Add-Member -NotePropertyName RcloneArgumentList -NotePropertyValue ('')
              
-    while ($Config.RcloneCloudPath.StartsWith('\')) { $Config.RcloneCloudPath = $Config.RcloneCloudPath.TrimStart('\') }      
-    while ($Config.RcloneCloudPath.EndsWith('\')) { $Config.RcloneCloudPath = $Config.RcloneCloudPath.TrimEnd('\') }    
-    Get-Content $Config.PathRcloneConfig | ForEach-Object {
-        if ($_.StartsWith('[') -and $_.EndsWith(']')) {
-            $uploadName = $_.Replace('[', '').Replace(']', '')
-            $Config.RcloneArgumentList = '' 
-            $Config.RcloneArgumentList += 'copy "' + $Config.PathAdvancedInstallerOutputFileZip + '" ' + $uploadName + ':"' + $Config.RcloneCloudPath + '"'
-            $Config.RcloneArgumentList += ' --config "' + $Config.PathRcloneConfig + '"'
-            $Config.RcloneArgumentList += ' --auto-confirm'
-            Write-Host ('Rclone upload: {0}=>{1}' -f $Config.PathAdvancedInstallerOutputFileZip, $uploadName)
-            Start-Process -WindowStyle Hidden -Wait -FilePath $Config.PathRclone -ArgumentList $Config.RcloneArgumentList
-        }
-    }  
+        while ($Config.RcloneCloudPath.StartsWith('\')) { $Config.RcloneCloudPath = $Config.RcloneCloudPath.TrimStart('\') }      
+        while ($Config.RcloneCloudPath.EndsWith('\')) { $Config.RcloneCloudPath = $Config.RcloneCloudPath.TrimEnd('\') }    
+        Get-Content $Config.PathRcloneConfig | ForEach-Object {
+            if ($_.StartsWith('[') -and $_.EndsWith(']')) {
+                $uploadName = $_.Replace('[', '').Replace(']', '')
+                $Config.RcloneArgumentList = '' 
+                $Config.RcloneArgumentList += 'copy "' + $Config.PathAdvancedInstallerOutputFileZip + '" ' + $uploadName + ':"' + $Config.RcloneCloudPath + '"'
+                $Config.RcloneArgumentList += ' --config "' + $Config.PathRcloneConfig + '"'
+                $Config.RcloneArgumentList += ' --auto-confirm'
+                Write-Host ('Rclone upload: {0}=>{1}' -f $Config.PathAdvancedInstallerOutputFileZip, $uploadName)
+                Start-Process -WindowStyle Hidden -Wait -FilePath $Config.PathRclone -ArgumentList $Config.RcloneArgumentList
+            }
+        }  
+    }
 }
 if ([System.IO.File]::Exists($Config.PathRclone)) { [System.IO.File]::Delete($Config.PathRclone) }
 if ([System.IO.File]::Exists($Config.PathRcloneConfig)) { [System.IO.File]::Delete($Config.PathRcloneConfig) }
-Write-Host $Config
+if ($Config.IsShowConfig) { Write-Host $Config }
