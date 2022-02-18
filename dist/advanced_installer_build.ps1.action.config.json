@@ -1,14 +1,14 @@
 {
    "Name": "create option for advanced installer build",
    "PathExecuteVersion": "..\\Deploy_Libraries\\HospitalSMSClient.exe",
-   "PathAdvancedInstallerCommandFile": "..\\Deploy_Tools\\BuildCommandFile.txt",
+   "PathAdvancedInstallerCommandFile": "..\\Deploy_Tools\\BuildCommandFile.githubignore.txt",
    "PathAdvancedInstallerProjectFile": "..\\Deploy_Tools\\Setup.aip",
    "PathAdvancedInstallerOutputFolder": "..\\Deploy_Tools\\OutputFiles",
    "OutputPackageName": "SetupHospitalSMSClient.exe",
    "PathRcloneZip": "..\\Deploy_Tools\\rclone.exe.zip",
    "RcloneCloudPath": "",
    "IsShowConfig": true,
-   "IsRunRcUpload": true,
+   "IsRunRcUpload": false,
    "IsAddFileAPPDIR": true,
    "PathAdvancedInstallerAPPDIR": "..\\Deploy_Libraries",
    "APPDIRFilenames": [
@@ -143,6 +143,10 @@
       "Name": "DHG.Hospital SMS Client",
       "Target": "APPDIR\\HospitalSMSClient.exe",
       "InDirectories": ["DesktopFolder", "StartMenuFolder\\DH Solutions"],
+      "PathIcon": "..\\Deploy_Tools\\Logo.ico"
+   },
+   "IconInControlPanel": {
+      "IsSetIcon": true,
       "PathIcon": "..\\Deploy_Tools\\Logo.ico"
    }
 }

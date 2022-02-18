@@ -5,6 +5,7 @@ $Config.PathExecuteVersion = (Join-Path -Path $PSScriptRoot -ChildPath $Config.P
 $Config.PathRcloneZip = (Join-Path -Path $PSScriptRoot -ChildPath $Config.PathRcloneZip -Resolve)
 $Config.PathAdvancedInstallerAPPDIR = (Join-Path -Path $PSScriptRoot -ChildPath $Config.PathAdvancedInstallerAPPDIR -Resolve)
 $Config.AdvancedInstallerShortcut.PathIcon = (Join-Path -Path $PSScriptRoot -ChildPath $Config.AdvancedInstallerShortcut.PathIcon -Resolve)
+$Config.IconInControlPanel.PathIcon = (Join-Path -Path $PSScriptRoot -ChildPath $Config.IconInControlPanel.PathIcon -Resolve)
 #Resolve Path file in Config
 try {
     $Config.PathAdvancedInstallerCommandFile = (Join-Path -Path $PSScriptRoot -ChildPath $Config.PathAdvancedInstallerCommandFile -Resolve)
@@ -70,6 +71,10 @@ if ($Config.IsNewShortcut) {
         $arrayLines.Add(('DelShortcut -name "{0}" -dir "{1}"' -f $shortcutName, $itemDir))
         $arrayLines.Add(('NewShortcut -name "{0}" -dir "{1}" -target "{2}" -icon "{3}"' -f $shortcutName, $itemDir, $shortcutTarget, $shortcutPathIcon))
     }
+}
+if ($Config.IconInControlPanel.IsSetIcon -and 
+    [System.IO.File]::Exists($Config.IconInControlPanel.PathIcon)) {
+    $arrayLines.Add(('SetIcon -icon "{0}"' -f $Config.IconInControlPanel.PathIcon))
 }
 $arrayLines.Add('Save')
 $arrayLines.Add('Rebuild')
