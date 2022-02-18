@@ -72,7 +72,7 @@ if ($Config.IsNewShortcut) {
     }
 }
 $arrayLines.Add('Save')
-#$arrayLines.Add('Rebuild')
+$arrayLines.Add('Rebuild')
 $arrayLines | Out-File -FilePath $Config.PathAdvancedInstallerCommandFile
 
 &AdvancedInstaller.com /execute $Config.PathAdvancedInstallerProjectFile $Config.PathAdvancedInstallerCommandFile 
