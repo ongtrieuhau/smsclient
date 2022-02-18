@@ -4,6 +4,7 @@ $Config = Get-Content -Path $PathConfig | ConvertFrom-Json
 $Config.PathExecuteVersion = (Join-Path -Path $PSScriptRoot -ChildPath $Config.PathExecuteVersion -Resolve)
 $Config.PathRcloneZip = (Join-Path -Path $PSScriptRoot -ChildPath $Config.PathRcloneZip -Resolve)
 $Config.PathAdvancedInstallerAPPDIR = (Join-Path -Path $PSScriptRoot -ChildPath $Config.PathAdvancedInstallerAPPDIR -Resolve)
+$Config.AdvancedInstallerShortcut.PathIcon = (Join-Path -Path $PSScriptRoot -ChildPath $Config.AdvancedInstallerShortcut.PathIcon -Resolve)
 #Resolve Path file in Config
 try {
     $Config.PathAdvancedInstallerCommandFile = (Join-Path -Path $PSScriptRoot -ChildPath $Config.PathAdvancedInstallerCommandFile -Resolve)
@@ -59,8 +60,19 @@ if ($Config.IsAddFileAPPDIR) {
         $arrayLines.Add('AddFile APPDIR "{0}" -overwrite always' -f $itemName) 
     }
 }
+if ($Config.IsNewShortcut) {
+    $shortcutName = $Config.AdvancedInstallerShortcut.Name
+    $shortcutPathIcon = $Config.AdvancedInstallerShortcut.PathIcon
+    $shortcutTarget = $Config.AdvancedInstallerShortcut.Target
+    $itemDir = ''
+    for ($i = 0; $i -lt $Config.AdvancedInstallerShortcut.InDirectories.Count; $i++) {
+        $itemDir = $Config.AdvancedInstallerShortcut.InDirectories[$i]
+        $arrayLines.Add(('DelShortcut -name "{0}" -dir "{1}"' -f $shortcutName, $itemDir))
+        $arrayLines.Add(('NewShortcut -name "{0}" -dir "{1}" -target "{2}" -icon "{3}"' -f $shortcutName, $itemDir, $shortcutTarget, $shortcutPathIcon))
+    }
+}
 $arrayLines.Add('Save')
-$arrayLines.Add('Rebuild')
+#$arrayLines.Add('Rebuild')
 $arrayLines | Out-File -FilePath $Config.PathAdvancedInstallerCommandFile
 
 &AdvancedInstaller.com /execute $Config.PathAdvancedInstallerProjectFile $Config.PathAdvancedInstallerCommandFile 

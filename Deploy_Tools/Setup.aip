@@ -23,13 +23,13 @@
     <ROW Property="ARPSYSTEMCOMPONENT" Value="1"/>
     <ROW Property="ARPURLINFOABOUT" Value="https://www.facebook.com/groups/dhg.hospital/"/>
     <ROW Property="ARPURLUPDATEINFO" Value="https://www.facebook.com/groups/dhg.hospital/"/>
-    <ROW Property="ExecuteVersion" Value="1.22.0217.8"/>
+    <ROW Property="ExecuteVersion" Value="1.22.0218.1"/>
     <ROW Property="FileVersion" Value="1.22.0208.3"/>
     <ROW Property="Manufacturer" Value="DH.Solutions"/>
-    <ROW Property="ProductCode" Value="1033:{3152693D-3F25-484F-8DDA-672FF2DA76E9} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{ABD4A1B5-A4C1-4F93-8164-D981E98AF67C} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="DH.HospitalSMSClient"/>
-    <ROW Property="ProductVersion" Value="1.22.02178.8" Type="32"/>
+    <ROW Property="ProductVersion" Value="1.22.02181.1" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND;AI_SETUPEXEPATH;SETUPEXEDIR"/>
     <ROW Property="UpgradeCode" Value="{2C066CB0-60A3-4FA0-8EE6-FD624E735121}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -44,11 +44,12 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
     <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
     <ROW Directory="DHSolutions_Dir" Directory_Parent="StartMenuFolder" DefaultDir="DHSOLU~1|DH Solutions"/>
+    <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="DESKTO~1|DesktopFolder" IsPseudoRoot="1"/>
     <ROW Directory="StartMenuFolder" Directory_Parent="TARGETDIR" DefaultDir="STARTM~1|StartMenuFolder" IsPseudoRoot="1"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
-    <ROW Component="AI_CustomARPName" ComponentId="{9B336423-084B-43D6-9C5D-75956BB0024D}" Directory_="APPDIR" Attributes="4" KeyPath="DisplayName" Options="1"/>
+    <ROW Component="AI_CustomARPName" ComponentId="{99065334-E52A-4EA4-B1F4-ADFB85BA8FA6}" Directory_="APPDIR" Attributes="4" KeyPath="DisplayName" Options="1"/>
     <ROW Component="AI_ExePath" ComponentId="{518ADA27-49ED-473F-A8A0-142273F7F408}" Directory_="APPDIR" Attributes="4" KeyPath="AI_ExePath"/>
     <ROW Component="APPDIR" ComponentId="{99139B0C-53A8-4FE9-9F7E-8654399EFBB4}" Directory_="APPDIR" Attributes="0"/>
     <ROW Component="ChilkatDotNet4.dll" ComponentId="{74619BF3-8466-48FB-9B4F-B535AE4F9832}" Directory_="APPDIR" Attributes="256" KeyPath="ChilkatDotNet4.dll"/>
@@ -663,6 +664,10 @@
     <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
     <ROW Registry="VersionMajor" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="VersionMajor" Value="#1" Component_="AI_CustomARPName" VirtualValue="#"/>
     <ROW Registry="VersionMinor" Root="-1" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\[ProductName] [ProductVersion]" Name="VersionMinor" Value="#18" Component_="AI_CustomARPName" VirtualValue="#"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
+    <ROW Shortcut="DHG.HospitalSMSClient" Directory_="DesktopFolder" Name="DHG~1.HOS|DHG.Hospital SMS Client" Component_="HospitalSMSClient.exe" Target="[#HospitalSMSClient.exe]" Hotkey="0" Icon_="Logo.exe" IconIndex="0" ShowCmd="1"/>
+    <ROW Shortcut="DHG.HospitalSMSClient_1" Directory_="DHSolutions_Dir" Name="DHG~1.HOS|DHG.Hospital SMS Client" Component_="HospitalSMSClient.exe" Target="[#HospitalSMSClient.exe]" Hotkey="0" Icon_="Logo.exe" IconIndex="0" ShowCmd="1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiTextStyleComponent">
     <ROW TextStyle="BrandingStyle" FaceName="Segoe UI" Size="8" Color="2171376" MultiBuildColor="DefaultBuild:15395562" StyleBits="0" MsiKey="BrandingStyle"/>

@@ -7,7 +7,7 @@
    "OutputPackageName": "SetupHospitalSMSClient.exe",
    "PathRcloneZip": "..\\Deploy_Tools\\rclone.exe.zip",
    "RcloneCloudPath": "",
-   "IsShowConfig": false,
+   "IsShowConfig": true,
    "IsRunRcUpload": true,
    "IsAddFileAPPDIR": true,
    "PathAdvancedInstallerAPPDIR": "..\\Deploy_Libraries",
@@ -137,5 +137,12 @@
       "TXTextControl.dll",
       "TXTextControl.Windows.Forms.dll",
       "itextsharp.dll"
-   ]
+   ],
+   "IsNewShortcut": true,
+   "AdvancedInstallerShortcut": {
+      "Name": "DHG.Hospital SMS Client",
+      "Target": "APPDIR\\HospitalSMSClient.exe",
+      "InDirectories": ["DesktopFolder", "StartMenuFolder\\DH Solutions"],
+      "PathIcon": "..\\Deploy_Tools\\Logo.ico"
+   }
 }
