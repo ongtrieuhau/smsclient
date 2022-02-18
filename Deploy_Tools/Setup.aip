@@ -23,13 +23,13 @@
     <ROW Property="ARPSYSTEMCOMPONENT" Value="1"/>
     <ROW Property="ARPURLINFOABOUT" Value="https://www.facebook.com/groups/dhg.hospital/"/>
     <ROW Property="ARPURLUPDATEINFO" Value="https://www.facebook.com/groups/dhg.hospital/"/>
-    <ROW Property="ExecuteVersion" Value="1.22.0218.2"/>
+    <ROW Property="ExecuteVersion" Value="1.22.0218.4"/>
     <ROW Property="FileVersion" Value="1.22.0208.3"/>
     <ROW Property="Manufacturer" Value="DH.Solutions"/>
-    <ROW Property="ProductCode" Value="1033:{67D40B3E-BEAC-4938-8371-59C074F7D81E} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{E9393060-739E-41FE-96F6-D8C4BEFD07F5} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="DH.HospitalSMSClient"/>
-    <ROW Property="ProductVersion" Value="1.22.02182.2" Type="32"/>
+    <ROW Property="ProductVersion" Value="1.22.02184.4" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND;AI_SETUPEXEPATH;SETUPEXEDIR"/>
     <ROW Property="UpgradeCode" Value="{2C066CB0-60A3-4FA0-8EE6-FD624E735121}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -49,7 +49,7 @@
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
-    <ROW Component="AI_CustomARPName" ComponentId="{9CB22095-4240-4C7D-88A6-4428CA489D4B}" Directory_="APPDIR" Attributes="4" KeyPath="DisplayName" Options="1"/>
+    <ROW Component="AI_CustomARPName" ComponentId="{7F6F16A5-465A-4D59-9898-8D8DF2398453}" Directory_="APPDIR" Attributes="4" KeyPath="DisplayName" Options="1"/>
     <ROW Component="AI_ExePath" ComponentId="{518ADA27-49ED-473F-A8A0-142273F7F408}" Directory_="APPDIR" Attributes="4" KeyPath="AI_ExePath"/>
     <ROW Component="APPDIR" ComponentId="{99139B0C-53A8-4FE9-9F7E-8654399EFBB4}" Directory_="APPDIR" Attributes="0"/>
     <ROW Component="ChilkatDotNet4.dll" ComponentId="{74619BF3-8466-48FB-9B4F-B535AE4F9832}" Directory_="APPDIR" Attributes="256" KeyPath="ChilkatDotNet4.dll"/>

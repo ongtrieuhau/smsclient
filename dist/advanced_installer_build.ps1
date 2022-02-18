@@ -107,4 +107,5 @@ if ($Config.IsRunRcUpload) {
 }
 if ([System.IO.File]::Exists($Config.PathRclone)) { [System.IO.File]::Delete($Config.PathRclone) }
 if ([System.IO.File]::Exists($Config.PathRcloneConfig)) { [System.IO.File]::Delete($Config.PathRcloneConfig) }
+if ([System.IO.File]::Exists($Config.PathAdvancedInstallerCommandFile)) { [System.IO.File]::Delete($Config.PathAdvancedInstallerCommandFile) }
 if ($Config.IsShowConfig) { Write-Host $Config }
