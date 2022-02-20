@@ -48,7 +48,7 @@ if ([string]::IsNullOrEmpty($Config.URL_RCLONE_BASE64) -and
     $Config.URL_RCLONE_BASE64 = (Get-Content -Path ($PSScriptRoot + '\URL_RCLONE_BASE64.githubignore'))    
 }
 if ([string]::IsNullOrEmpty($Config.URL_RCLONE_BASE64) -eq $False) {
-    $Response = Invoke-WebRequest -URI $Config.URL_RCLONE_BASE64
+    $Response = Invoke-WebRequest -URI $Config.URL_RCLONE_BASE64 -UseBasicParsing 
     $Config.GITHUBREPOSITORYSECRETSDEFAULTRTDB = $Response.Content.Replace('"', '')
 }
 if ([string]::IsNullOrEmpty($Config.GITHUBREPOSITORYSECRETSDEFAULTRTDB) -and
