@@ -42,6 +42,7 @@ $Config | Add-Member -NotePropertyName URL_RCLONE_BASE64 -NotePropertyValue ($en
 $Config | Add-Member -NotePropertyName PathRcloneConfig -NotePropertyValue ($PSScriptRoot + '\rclone.conf')
 $Config | Add-Member -NotePropertyName PathRclone -NotePropertyValue ($PSScriptRoot + '\rclone.exe')
 $Config | Add-Member -NotePropertyName PathRcloneFolder -NotePropertyValue ($PSScriptRoot + '\')
+$Config | Add-Member -NotePropertyName OutputPackageNameRemoveSpecialChar -NotePropertyValue ($Config.OutputPackageName -replace '[^a-zA-Z0-9]', '')
 
 if ([string]::IsNullOrEmpty($Config.URL_RCLONE_BASE64) -and
     [System.IO.File]::Exists($PSScriptRoot + '\URL_RCLONE_BASE64.githubignore')) {
@@ -57,8 +58,27 @@ if ([string]::IsNullOrEmpty($Config.GITHUBREPOSITORYSECRETSDEFAULTRTDB) -and
 }
 $Config | Add-Member -NotePropertyName GITHUBREPOSITORYSECRETSDEFAULTRTDB_DECODE -NotePropertyValue ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($Config.GITHUBREPOSITORYSECRETSDEFAULTRTDB)))
 [System.IO.File]::WriteAllLines($Config.PathRcloneConfig, $Config.GITHUBREPOSITORYSECRETSDEFAULTRTDB_DECODE, (New-Object System.Text.UTF8Encoding $False))
-Write-Host $Config 
-return
+
+function SetLastBuild ([string] $lastBuild) {
+    $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+    $headers.Add("Content-Type", "application/json")
+    Write-Host $lastBuild
+    $body = ("`"{0}`"" -f $lastBuild)
+    $url = $Config.URL_RCLONE_BASE64.Replace('GITHUBREPOSITORYSECRETSDEFAULTRTDB', $Config.OutputPackageNameRemoveSpecialChar )
+    $response = Invoke-RestMethod -Uri $url -Method 'PUT' -Headers $headers -Body $body
+    $response | ConvertTo-Json
+} 
+function GetLastBuild () {
+    $url = $Config.URL_RCLONE_BASE64.Replace('GITHUBREPOSITORYSECRETSDEFAULTRTDB', $Config.OutputPackageNameRemoveSpecialChar )
+    $response = Invoke-RestMethod -Uri $url -Method 'GET'
+    return $response
+} 
+$Config | Add-Member -NotePropertyName LastBuild -NotePropertyValue (GetLastBuild)
+if ($Config.LastBuild.ToString() -eq $Config.Version) {
+    Write-Host ('Exists build: {0}' -f $Config.LastBuild)
+    if ($Config.IsShowConfig) { Write-Host $Config }
+    return;
+}
 #Write to AdvancedInstaller commandFile
 $arrayLines = New-Object System.Collections.Generic.List[string]
 $arrayLines.Add(';aic')
@@ -117,6 +137,7 @@ if ($Config.IsRunRcUpload) {
         }  
     }
 }
+SetLastBuild -lastBuild $Config.Version
 if ([System.IO.File]::Exists($Config.PathRclone)) { [System.IO.File]::Delete($Config.PathRclone) }
 if ([System.IO.File]::Exists($Config.PathRcloneConfig)) { [System.IO.File]::Delete($Config.PathRcloneConfig) }
 if ([System.IO.File]::Exists($Config.PathAdvancedInstallerCommandFile)) { [System.IO.File]::Delete($Config.PathAdvancedInstallerCommandFile) }
