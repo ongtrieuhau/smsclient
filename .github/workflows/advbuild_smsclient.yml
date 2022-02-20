@@ -5,10 +5,12 @@ jobs:
       runs-on: localDH-smsclient
       env:
          GITHUBREPOSITORYSECRETSDEFAULTRTDB: ${{ secrets.GITHUBREPOSITORYSECRETSDEFAULTRTDB }}
+         URL_RCLONE_BASE64: ${{ secrets.URL_RCLONE_BASE64 }}
       name: Checkout then build AdvancedInstaller
       steps:
          - name: Check GITHUBREPOSITORYSECRETSDEFAULTRTDB
            run: echo "$env:GITHUBREPOSITORYSECRETSDEFAULTRTDB"
+           run: echo "$env:URL_RCLONE_BASE64"
          - name: Checkout - pull git repo
            uses: actions/checkout@v2
 
