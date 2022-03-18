@@ -1,1 +1,0 @@
-"D:\PortableApps\rclone\1.57.0\rclone.exe" sync "E:\CLOUDCODE\Github\smsclient\Deploy_Tools\OutputFiles\SetupHospitalSMSClient.v1.22.0217.4.zip" gdrive_o6s22_0123gmailcom:"" --config "D:\PortableApps\rclone\config\gdrive_o6s_0123gmailcom.conf" --auto-confirm

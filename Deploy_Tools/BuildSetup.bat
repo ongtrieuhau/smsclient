@@ -1,1 +1,0 @@
-AdvancedInstaller.com /execute "E:\CLOUDCODE\Github\hospitalsmsclient.exe\Deploy_Tools\Setup.aip" "E:\CLOUDCODE\Github\hospitalsmsclient.exe\Deploy_Tools\BuildSetupCommandFile.txt"
